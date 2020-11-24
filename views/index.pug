@@ -11,13 +11,17 @@ block content
     div.divmargin
       a(href="/create") Create new message
 
+    div.divmargin
+      a(href="/account") Enter secret member key
+  
+
     div
       posts_list
       each message in posts_list
         div.board_message
           p #{message.timestamp}
-          p #{message.author[3]}
-          p #{message.title}
+          p #{message.author.username}, #{message.author.first_name} #{message.author.last_name}
+          h3 #{message.title}
           p #{message.message}
           
           
@@ -30,3 +34,10 @@ block content
     div.divmargin
       a(href="/login") Log In here
     
+    div
+      posts_list
+      each message in posts_list
+        div.board_message
+          p #{message.timestamp}
+          h3 #{message.title}
+          p #{message.message}

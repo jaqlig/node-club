@@ -7,7 +7,7 @@ var UserSchema = new Schema(
         last_name: { type: String, required: true },
         username: { type: String, required: true },
         password: { type: String, required: true },
-        account_type: { type: Number }
+        account_type: { type: Number } // 0: user, 1: full member, 2: admin
     }
 );
 

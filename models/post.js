@@ -5,8 +5,8 @@ var PostSchema = new Schema (
     {
         title: { type: String },
         message: { type: String, required: true },
-        timestamp: { type: String, required: true },
-        author: { type: String, required: true }
+        timestamp: { type: JSON, required: true },
+        author: { type: JSON, required: true }
     }
 );
 

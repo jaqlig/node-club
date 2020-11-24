@@ -21,6 +21,12 @@ a {
 }
 
 .board_message{
-  height: 280px;
+  min-height: 100px;
   width: 600px;
+  background-color: rgb(240, 240, 240);
+  border-radius: 8px;
+  padding: 7px;
+  margin: 7px;
+  border: 1px solid;
+  border-color: rgb(179, 179, 179);
 }

@@ -39,6 +39,7 @@ exports.message_post = [
 
 // display all messages
 exports.all_posts = function (req, res, next) {
+    
     Post.find()
     .exec(function (err, allPosts) {
         if (err) {
@@ -51,6 +52,10 @@ exports.all_posts = function (req, res, next) {
             err.status = 404;
             return next(err);
         }
-        res.render('index', {  user: req.user, posts_list: allPosts});
-    });
+        if (req.user){
+        res.render('index', { user: req.user, posts_list: allPosts });
+        } else {
+            res.render('index', { posts_list: allPosts });
+        }
+    });    
 }

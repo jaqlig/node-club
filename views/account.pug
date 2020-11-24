@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 Enter secret member key
+
+    form(method="POST" action="change")
+        div
+            label(for="key") Username: 
+            input(name="key" placeholder="Secret key" type="text")
+        
+        button Change account type
+
+    p= msg
