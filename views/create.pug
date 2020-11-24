@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h1 Create new message
+
+    a(href="../") return to main page
+
+    if user
+        form(method="POST" action="create")
+
+            div.divmargin
+                button Post the message
+
+            div.divmargin
+                label(for="title") title: 
+                input(name="title" placeholder="title" type="text" value=(undefined===title ? '' : title))
+            
+            div.divmargin#message
+                label(for="message") message: 
+                textarea(name="message" cols="30" rows="10" placeholder="message" value=(undefined===message ? '' : message))
+    else
+        h2 You need an account to post here.
+
+        div.divmargin
+            a(href="/login") Log In here first
+
+        div.divmargin
+            a(href="/signup") Or Sign Up here
+            |, if You don't have an account yet
+            
+        
+
+    p= msg

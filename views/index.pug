@@ -1,0 +1,32 @@
+extends layout
+
+block content
+
+  if user
+    h1 Welcome #{user.username}!
+
+    div.divmargin
+      a(href="/logout") Log out
+
+    div.divmargin
+      a(href="/create") Create new message
+
+    div
+      posts_list
+      each message in posts_list
+        div.board_message
+          p #{message.timestamp}
+          p #{message.author[3]}
+          p #{message.title}
+          p #{message.message}
+          
+          
+
+  else
+    h1 Welcome Guest!
+
+    div.divmargin
+      a(href="/signup") Sign Up here
+    div.divmargin
+      a(href="/login") Log In here
+    

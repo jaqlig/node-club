@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    h1 Log In
+
+    form(method="POST" action="login")
+        div
+            label(for="username") Username: 
+            input(name="username" placeholder="username" type="text" value=(undefined===username ? '' : username))
+        
+        div
+            label(for="password") Password: 
+            input(name="password" placeholder="Password" type="password")
+
+        button Log In
+
+    p= msg

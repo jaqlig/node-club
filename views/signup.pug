@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1 Sign Up
+
+    form(method="POST" action="")
+        div.signup
+            label(for="first_name") First name
+            input(name="first_name" placeholder="First name" type="text" value=(undefined===first_name ? '' : first_name))
+        div.signup
+            label(for="last_name") Last name
+            input(name="last_name" placeholder="Last name" type="text" value=(undefined===last_name ? '' : last_name))
+        div.signup
+            label(for="username") username
+            input(name="username" placeholder="username" type="text" value=(undefined===username ? '' : username))
+        div.signup
+            label(for="password") Password
+            input(name="password" placeholder="Password" type="password")
+        div.signup
+            label(for="passwordConfirmation") Retype password
+            input(name="passwordConfirmation" placeholder="Retype password" type="password")
+
+        button Sign Up
+
+        p #{errMsg}

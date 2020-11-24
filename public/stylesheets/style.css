@@ -1,0 +1,26 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.signup {
+  margin: 11px;
+}
+
+#message {
+  width: 30px;
+  height: 90px;
+}
+
+.divmargin {
+  margin: 14px;
+}
+
+.board_message{
+  height: 280px;
+  width: 600px;
+}
