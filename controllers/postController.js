@@ -59,3 +59,12 @@ exports.all_posts = function (req, res, next) {
         }
     });    
 }
+
+exports.remove_message_post = function(req, res, next) {
+    
+    Post.findByIdAndRemove(req.params.id, function(err){
+        if (err) return next(err);
+        res.redirect('/');
+    });
+
+}

@@ -2,9 +2,10 @@ extends layout
 
 block content
     h1 Enter secret member key
+    a(href="../") return to main page
 
-    form(method="POST" action="change")
-        div
+    form(method="POST" action="account")
+        div.divmargin
             label(for="key") Username: 
             input(name="key" placeholder="Secret key" type="text")
         

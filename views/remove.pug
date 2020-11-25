@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    a(href="../") return to main page
+
+    if (user && user.account_type === 2)
+
+        h1 Remove the post?
+        form(method="POST" action=id)
+            div.divmargin
+                button Remove
+            div.divmargin
+                a(href="../") return to main page
+
+    else
+        h3 Only admin can delete messages.
+
+    p= msg

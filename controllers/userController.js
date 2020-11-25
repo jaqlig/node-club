@@ -23,6 +23,7 @@ exports.new_user_post = [
 
         const errors = validator.validationResult(req);
 
+        // Reload with data if error
         if (!errors.isEmpty()) {
             res.render('signup', {
                 first_name: req.body.first_name,
@@ -35,6 +36,7 @@ exports.new_user_post = [
             return;
         }
 
+        // Save to db
         else {
             bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
                 if (err) return next(err);
@@ -60,6 +62,51 @@ exports.user_login_post = (req, res) => {
     passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/login',
-        
-    })(req,res);
-  };
+
+    })(req, res);
+};
+
+// Change account type
+exports.account_type_post = [
+
+    validator.body('key').trim().isLength({ min: 1 }),
+    validator.sanitizeBody('key').escape(),
+
+    (req, res, next) => {
+        const errors = validator.validationResult(req);
+
+        if (!errors.isEmpty()) res.render('account', { msg: "Error in secret code." });
+
+        else {
+            User.findById(req.user.id).exec(
+                function (err) {
+                    if (err) return next(err);
+
+                    let account_match;
+                    if (req.body.key === 'ch4ng3_t0_us3r') account_match = 0;
+                    else if (req.body.key === 'ch4ng3_t0_m3mb3r') account_match = 1;
+                    else if (req.body.key === 'ch4ng3_t0_1337') account_match = 2;
+                    else {
+                        res.render('account', { msg: "This is not a valid code." });
+                        return;
+                    }
+
+                    const user = new User({
+                        first_name: req.user.first_name,
+                        last_name: req.user.last_name,
+                        username: req.user.username,
+                        password: req.user.password,
+                        account_type: account_match,
+                        _id: req.user.id
+                    });
+
+                    User.findByIdAndUpdate(req.user.id, user, {}, function (err) {
+                        if (err) return next(err);
+                        res.redirect('/');
+                    });
+
+                }
+            );
+        }
+    }
+];

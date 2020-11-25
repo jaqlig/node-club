@@ -34,6 +34,12 @@ router.post('/create', postController.message_post);
 router.get('/account', (req, res) => {
   res.render('account', { user: req.user });
 });
-// router.post('/account', postController.message_post);
+router.post('/account', userController.account_type_post);
+
+// message remove
+router.get('/remove/:id', (req, res) => {
+  res.render('remove', { id:req.params.id, user:req.user });
+});
+router.post('/remove/:id', postController.remove_message_post);
 
 module.exports = router;

@@ -3,31 +3,53 @@ extends layout
 block content
 
   if user
-    h1 Welcome #{user.username}!
+    if (user.account_type === 1 || user.account_type === 2)
+      h1 Welcome to our club, #{user.username}!
 
-    div.divmargin
-      a(href="/logout") Log out
+      if user.account_type === 1
+        p(style="color: darkgreen") You are a full member.
 
-    div.divmargin
-      a(href="/create") Create new message
+      else if user.account_type === 2
+        p(style="color: red") You have admin privileges.
 
-    div.divmargin
-      a(href="/account") Enter secret member key
-  
 
-    div
-      posts_list
-      each message in posts_list
-        div.board_message
-          p #{message.timestamp}
-          p #{message.author.username}, #{message.author.first_name} #{message.author.last_name}
-          h3 #{message.title}
-          p #{message.message}
+      div.divmargin
+        a(href="/logout") Log out
+
+      div.divmargin
+        a(href="/create") Create new message
+
+      div
+        posts_list
+        each message in posts_list
+          div.board_message 
+            p #{message.timestamp}
+            p #{message.author.username}, #{message.author.first_name} #{message.author.last_name}
+            h3 #{message.title}
+            p #{message.message}
+            if user.account_type === 2
+              a(href="/remove/"+message.id style="color:red") remove
           
+    else
+      h1 Welcome, #{user.username}!
+      p You are not a full member.
+      a(href="/account") Enter the secret key here
+      |  to get member status.
+
+      div.divmargin
+        a(href="/logout") Log out
+
+      div
+        posts_list
+        each message in posts_list
+          div.board_message
+            p #{message.timestamp}
+            h3 #{message.title}
+            p #{message.message}
           
 
   else
-    h1 Welcome Guest!
+    h1 Welcome, Guest!
 
     div.divmargin
       a(href="/signup") Sign Up here
