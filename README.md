@@ -10,6 +10,6 @@ There are 3 account types:
 * `Admin`- same as `member` but can also remove messages
 
 `User`is default, you can change your account type with the secret codes:
-`ch4ng3_t0_us3r` changes account back to `user`
-`ch4ng3_t0_m3mb3r` to `member`
-`ch4ng3_t0_1337` to`admin`
+* `ch4ng3_t0_us3r` changes account back to `user`
+* `ch4ng3_t0_m3mb3r` to `member`
+* `ch4ng3_t0_1337` to`admin`
