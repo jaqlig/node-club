@@ -1,14 +1,26 @@
 extends layout
 
 block content
-    h1 Enter secret member key
-    a(href="../") return to main page
+    a.return(href="../") return to main page
+    
+    if user
+        h1 Enter secret member key
 
-    form(method="POST" action="account")
+        form(method="POST" action="account")
+            div.divmargin
+                label(for="key") Username: 
+                input(name="key" placeholder="Secret key" type="text")
+            
+            button Change account type
+    
+    else 
+        h2 You need an account to change account type.
+
         div.divmargin
-            label(for="key") Username: 
-            input(name="key" placeholder="Secret key" type="text")
-        
-        button Change account type
+            a(href="/login") Log In here first
+
+        div.divmargin
+            a(href="/signup") Or Sign Up here
+            |, if You don't have an account yet
 
     p= msg

@@ -19,8 +19,7 @@ block content
       div.divmargin
         a(href="/create") Create new message
 
-      div
-        posts_list
+      div.all_messages
         each message in posts_list
           div.board_message 
             p #{message.timestamp}

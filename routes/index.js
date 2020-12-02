@@ -8,13 +8,13 @@ router.get('/', postController.all_posts);
 
 // sign up
 router.get('/signup', function (req, res, next) {
-  res.render('signup');
+  res.render('signup', { user: req.user });
 });
 router.post('/signup', userController.new_user_post);
 
 // log in
 router.get('/login', function (req, res, next) {
-  res.render('login');
+  res.render('login', { user: req.user });
 });
 router.post('/login', userController.user_login_post);
 

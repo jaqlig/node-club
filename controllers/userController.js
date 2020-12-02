@@ -23,36 +23,59 @@ exports.new_user_post = [
 
         const errors = validator.validationResult(req);
 
-        // Reload with data if error
-        if (!errors.isEmpty()) {
-            res.render('signup', {
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                username: req.body.username,
-                account_type: req.body.account_type,
-                errMsg: 'Correct typed data',
-                errors: errors.array()
-            });
-            return;
-        }
 
-        // Save to db
-        else {
-            bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-                if (err) return next(err);
+        User.findOne({'username': req.body.username})
+            .exec(function (err, user_in_db) {
+                if (err) {
+                    const err = new Error('Error while searching username in database');
+                    err.status = 404;
+                    return next(err);
+                }
+                if (user_in_db == null) {
 
-                const user = new User({
-                    first_name: req.body.first_name,
-                    last_name: req.body.last_name,
-                    username: req.body.username,
-                    account_type: 0,
-                    password: hashedPassword
-                }).save(err => {
-                    if (err) return next(err);
-                    res.redirect("/");
-                });
+                    // Reload with data if error
+                    if (!errors.isEmpty()) {
+                        res.render('signup', {
+                            first_name: req.body.first_name,
+                            last_name: req.body.last_name,
+                            username: req.body.username,
+                            account_type: req.body.account_type,
+                            errMsg: 'Correct typed data',
+                            errors: errors.array()
+                        });
+                        return;
+                    }
+
+                    // Save to db
+                    else {
+                        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+                            if (err) return next(err);
+
+                            const user = new User({
+                                first_name: req.body.first_name,
+                                last_name: req.body.last_name,
+                                username: req.body.username,
+                                account_type: 0,
+                                password: hashedPassword
+                            }).save(err => {
+                                if (err) return next(err);
+                                res.render('login', { msg: "Now log in to confirm Your account." });
+                            });
+                        });
+                    }
+
+                }
+                else {
+                    res.render('signup', {
+                        first_name: req.body.first_name,
+                        last_name: req.body.last_name,
+                        account_type: req.body.account_type,
+                        errMsg: "User with this username already exists",
+                        errors: errors.array()
+                    });
+                    return;        
+                }
             });
-        }
     }
 ];
 

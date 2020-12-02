@@ -1,24 +1,21 @@
 extends layout
 
 block content
+    a.return(href="../") return to main page
+    
     h1 Create new message
-
-    a(href="../") return to main page
 
     if user
         if (user.account_type === 1 || user.account_type === 2)
             form(method="POST" action="create")
-
                 div.divmargin
                     button Post the message
 
                 div.divmargin
-                    label(for="title") title: 
                     input(name="title" placeholder="title" type="text" value=(undefined===title ? '' : title))
                 
-                div.divmargin#message
-                    label(for="message") message: 
-                    textarea(name="message" cols="30" rows="10" placeholder="message" value=(undefined===message ? '' : message))
+                div.divmargin
+                    textarea(name="message" cols="50" rows="20" placeholder="message" value=(undefined===message ? '' : message))
         else
 
             h3 You are not a full member.
