@@ -17,7 +17,7 @@ var usersRouter = require('./routes/users');
 const app = express();
 
 const mongoose = require("mongoose");
-const mongoDB = process.env.DB_HOST;
+const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
